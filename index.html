@@ -323,6 +323,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="localhost/2019/03/09/th-cobaltstrike3.13破解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwings">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kiwings">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/09/th-cobaltstrike3.13破解/" itemprop="url">th-cobaltsrike3.13破解事项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T00:00:00+00:00">2019-03-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>网上有很多关于cs的破解教程，我本也无意再写一篇，但是目前在网上看到的教程都是针对3.13以前的版本。<br>众所周知的事，3.13之前cobaltstrike存在一个严重的漏洞，导致teamserver可被全网扫描探测到。<br>3.13的release中提到了修复该漏洞，但是，但是，准确的说是把3.13正式版的修复了(是的，作者给trail版留了一个坑)。<br>另外还有一些需要注意的点，一一提出。</p>
+<p>先说需要修改的代码文件<br>/aggressor/dialogs/ListenerDialog.java<br><strong>/common/ArtifactUtils.java</strong><br><strong>/common/Authorization.java</strong><br>/common/License.java<br><strong>/encoders/XorEncoder.java</strong><br>/server/ProfileEdits.java<br>/resources/template.x86.ps1<br>/resources/template.x64.ps1</p>
+<p>加粗部分是3.13版本需要特别对待注意的。</p>
+<h2 id="重要内容"><a href="#重要内容" class="headerlink" title="重要内容"></a>重要内容</h2><h3 id="空格陷阱"><a href="#空格陷阱" class="headerlink" title="空格陷阱"></a>空格陷阱</h3><p>先说最重要的内容，很多人以为3.13trail可以放心使用，但是这里要注意一个隐蔽的坑点！<br>直接定位文件 <strong>common/WebTransforms.java</strong><br>由文件名称我们可以知道这是用于web传输的类，看到第40行。</p>
+<p><img src="/images/crack_cs/2_status.png" alt="万恶的空格"></p>
+<p>作者在这里加多一个空格的用意想必大家也明白，等我一天就能赚到一个license的钱的话，我也会支持正版的！<br>现阶段还是将就一下用trail版，果断把这一行给删了！</p>
+<p>再说说如何在3.12中直接修复<br>定位漏洞文件 <strong>couldstrike/NanoHTTPD.java</strong><br>搜索字符串“\r\n”,来到353行。</p>
+<p><img src="/images/crack_cs/1_space.png" alt="万恶的空格"></p>
+<p>看到这个空格了吧，就是这个空格让我被暴露了！下狠手把它干掉。<br>然后再重新编译覆盖NanoHTTPD.class即可。</p>
+<h3 id="丢失的代码"><a href="#丢失的代码" class="headerlink" title="丢失的代码"></a>丢失的代码</h3><p>有破解过3.12的人看一下大概就知道是什么情况了，我直接把缺失部分在3.12中拷过来了。<br>定位文件 <strong>/common/ArtifactUtils.java</strong>和 <strong>/encoders/XorEncoder.java</strong><br>这两个文件都少了对payload编码的代码</p>
+<p><img src="/images/crack_cs/cs_xor1.png" alt="被删除了的部分函数"></p>
+<p>如上图，左边是3.13的ArtifactUtls.java，右边是3.12对，可以看出代码被删减了很多。经过搜索，3.12中的部分代码被搬到了BaseArtifactUtils.java中，那么这里我们就只需要补上关于xorencode对代码即可。<br>从3.12对ArtifactUtils.java中将函数 <strong>XorStubBegin XorStub _XorEncode XorEncode</strong>复制到3.13中即可(图上右边的函数)。</p>
+<p><img src="/images/crack_cs/cs_xor2.png" alt="被删除了的部分函数"></p>
+<p>然后上图则是XorEncoder.java的对比，同样，把函数直接拷贝到对应的文件中。<br>然后将xorbin.64放入resource文件中（<a href="https://github.com/verctor/CS_xor64）" target="_blank" rel="noopener">https://github.com/verctor/CS_xor64）</a></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里有一点要注意的是，因为改变了xorencode的方式，经过测试powershell payload无法正常回连，如果你也是这样，请尝试用3.12的template.ps1替换掉3.13的。</p>
+<h2 id="常规内容"><a href="#常规内容" class="headerlink" title="常规内容"></a>常规内容</h2><p>接下来的内容都是在网上泛滥的了，但是为了内容完整还是写出来吧，有经验的人直接略过即可。</p>
+<h3 id="修改license"><a href="#修改license" class="headerlink" title="修改license"></a>修改license</h3><p>关于license.java的修改网上已经有很多内容了，这里就简单说一下。<br>定位文件 <strong>/common/license.java</strong></p>
+<p><img src="/images/crack_cs/cs_trail.png" alt="License"></p>
+<p>将isTrail() 的返回值修改为false。再将life修改为6666L。</p>
+<h3 id="去掉监听器数量限制"><a href="#去掉监听器数量限制" class="headerlink" title="去掉监听器数量限制"></a>去掉监听器数量限制</h3><p>定位文件 <strong>/aggressor/dialogs/ListenerDialog.java</strong></p>
+<p><img src="/images/crack_cs/cs_listen.png" alt="监听器数量限制"><br>将91行的else if逻辑删除即可。</p>
+<h3 id="去掉水印"><a href="#去掉水印" class="headerlink" title="去掉水印"></a>去掉水印</h3><p>定位文件 <strong>/server/ProfileEdits.java /resources/template.x86.ps1 /resources/template.x64.ps1</strong></p>
+<p><img src="/images/crack_cs/cs_eicar1.png" alt="水印"></p>
+<p>去掉ProfileEdits.java中前五行的水印。</p>
+<p><a href="/images/crack_cs/cs_eicar2.png">水印</a></p>
+<p>去掉template.x64.ps1, tempalte.x86.ps1中第一行的水印。</p>
+<p>定位文件 <strong>/common/Authorization.java</strong><br>将该函数的返回值修改为 “”，即返回空。</p>
+<hr>
+<p>至此，对cs的破解就算结束了。可能有人会说，水印去除的不完整，但是因为大部分水印添加的判断是根据isTrial()和getWatermark()来添加的，所以修改了返回值后不去除也没有关系。</p>
+<p>正式license可以使用作者的artifactkit，对于免杀是很有用的，但是我没能拿到这个资源哎。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="localhost/2019/02/27/th-反向RDP攻击的尝试/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1426,7 +1597,7 @@ catch(const exception&amp; e)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
