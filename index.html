@@ -412,7 +412,7 @@
         
           
             <p>网上有很多关于cs的破解教程，我本也无意再写一篇，但是目前在网上看到的教程都是针对3.13以前的版本。<br>众所周知的事，3.13之前cobaltstrike存在一个严重的漏洞，导致teamserver可被全网扫描探测到。<br>3.13的release中提到了修复该漏洞，但是，但是，准确的说是把3.13正式版的修复了(是的，作者给trail版留了一个坑)。<br>另外还有一些需要注意的点，一一提出。</p>
-<p>先说需要修改的代码文件<br>/aggressor/dialogs/ListenerDialog.java<br><strong>/common/ArtifactUtils.java</strong><br><strong>/common/Authorization.java</strong><br>/common/License.java<br><strong>/encoders/XorEncoder.java</strong><br>/server/ProfileEdits.java<br>/resources/template.x86.ps1<br>/resources/template.x64.ps1</p>
+<p>先说需要修改的代码文件<br>/aggressor/dialogs/ListenerDialog.java<br><strong>/common/ArtifactUtils.java</strong><br><strong>common/WebTransforms.java</strong><br>/common/Authorization.java<br>/common/License.java<br><strong>/encoders/XorEncoder.java</strong><br>/server/ProfileEdits.java<br>/resources/template.x86.ps1<br>/resources/template.x64.ps1</p>
 <p>加粗部分是3.13版本需要特别对待注意的。</p>
 <h2 id="重要内容"><a href="#重要内容" class="headerlink" title="重要内容"></a>重要内容</h2><h3 id="空格陷阱"><a href="#空格陷阱" class="headerlink" title="空格陷阱"></a>空格陷阱</h3><p>先说最重要的内容，很多人以为3.13trail可以放心使用，但是这里要注意一个隐蔽的坑点！<br>直接定位文件 <strong>common/WebTransforms.java</strong><br>由文件名称我们可以知道这是用于web传输的类，看到第40行。</p>
 <p><img src="/images/crack_cs/2_status.png" alt="万恶的空格"></p>
