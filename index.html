@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="localhost/2019/03/09/th-cobaltstrike3.13破解/">
+    <link itemprop="mainEntityOfPage" href="localhost/2019/03/03/th-cobaltstrike3.13破解/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kiwings">
@@ -342,7 +342,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/09/th-cobaltstrike3.13破解/" itemprop="url">th-cobaltsrike3.13破解事项</a></h1>
+                <a class="post-title-link" href="/2019/03/03/th-cobaltstrike3.13破解/" itemprop="url">th-cobaltsrike3.13破解事项</a></h1>
         
 
         <div class="post-meta">
@@ -354,7 +354,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T00:00:00+00:00">2019-03-09</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-03T00:00:00+00:00">2019-03-03</time>
             
 
             
@@ -425,7 +425,7 @@
 <p>如上图，左边是3.13的ArtifactUtls.java，右边是3.12对，可以看出代码被删减了很多。经过搜索，3.12中的部分代码被搬到了BaseArtifactUtils.java中，那么这里我们就只需要补上关于xorencode对代码即可。<br>从3.12对ArtifactUtils.java中将函数 <strong>XorStubBegin XorStub _XorEncode XorEncode</strong>复制到3.13中即可(图上右边的函数)。</p>
 <p><img src="/images/crack_cs/cs_xor2.png" alt="被删除了的部分函数"></p>
 <p>然后上图则是XorEncoder.java的对比，同样，把函数直接拷贝到对应的文件中。<br>然后将xorbin.64放入resource文件中（<a href="https://github.com/verctor/CS_xor64）" target="_blank" rel="noopener">https://github.com/verctor/CS_xor64）</a></p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里有一点要注意的是，因为改变了xorencode的方式，经过测试powershell payload无法正常回连，如果你也是这样，请尝试用3.12的template.ps1替换掉3.13的。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>这里有一点要注意的是，因为改变了xorencode的方式，经过测试powershell payload无法正常回连，如果你也是这样，请下载最下方我给出的ps1文件替换。</p>
 <h2 id="常规内容"><a href="#常规内容" class="headerlink" title="常规内容"></a>常规内容</h2><p>接下来的内容都是在网上泛滥的了，但是为了内容完整还是写出来吧，有经验的人直接略过即可。</p>
 <h3 id="修改license"><a href="#修改license" class="headerlink" title="修改license"></a>修改license</h3><p>关于license.java的修改网上已经有很多内容了，这里就简单说一下。<br>定位文件 <strong>/common/license.java</strong></p>
 <p><img src="/images/crack_cs/cs_trail.png" alt="License"></p>
@@ -437,10 +437,17 @@
 <p>去掉ProfileEdits.java中前五行的水印。</p>
 <p><a href="/images/crack_cs/cs_eicar2.png">水印</a></p>
 <p>去掉template.x64.ps1, tempalte.x86.ps1中第一行的水印。</p>
-<p>定位文件 <strong>/common/Authorization.java</strong><br>将该函数的返回值修改为 “”，即返回空。</p>
+<p>定位文件 <strong>/common/Authorization.java</strong><br>将该函数的返回值修改为 “1”，当然也可以修改，只要其他引用到该地方的水印去除即可。</p>
 <hr>
 <p>至此，对cs的破解就算结束了。可能有人会说，水印去除的不完整，但是因为大部分水印添加的判断是根据isTrial()和getWatermark()来添加的，所以修改了返回值后不去除也没有关系。</p>
 <p>正式license可以使用作者的artifactkit，对于免杀是很有用的，但是我没能拿到这个资源哎。</p>
+<hr>
+<h3 id="step"><a href="#step" class="headerlink" title="step"></a>step</h3><p>0x00: 使用Luyten（<a href="https://github.com/deathmarine/Luyten）打开cobaltstrike.jar，导出文件。" target="_blank" rel="noopener">https://github.com/deathmarine/Luyten）打开cobaltstrike.jar，导出文件。</a></p>
+<p>0x01: 将需要修改的java文件拷贝出来放到与jar相同的目录下，根据上述操作修改相关的代码。</p>
+<p>0x02: 当前目录打开命令行，运行javac -classpath ./cobaltstrike.jar ./????.java 生成.class文件。</p>
+<p>0x03: 用7z等解压缩工具打开.jar文件，替换相关的.class文件。</p>
+<h3 id="trail版本下载地址"><a href="#trail版本下载地址" class="headerlink" title="trail版本下载地址"></a>trail版本下载地址</h3><p><a href="https://pan.baidu.com/s/1s1hp2zYIU0SzmV8UXDbD9g" target="_blank" rel="noopener">https://pan.baidu.com/s/1s1hp2zYIU0SzmV8UXDbD9g</a> 密码a1on(该trail来自小密圈匿名用户分享)</p>
+<h3 id="ps1文件"><a href="#ps1文件" class="headerlink" title="ps1文件"></a>ps1文件</h3><p><a href="https://github.com/kiwings/CobaltStrike-Toolset/blob/master/template.x64.ps1" target="_blank" rel="noopener">https://github.com/kiwings/CobaltStrike-Toolset/blob/master/template.x64.ps1</a><br><a href="https://github.com/kiwings/CobaltStrike-Toolset/blob/master/template.x86.ps1" target="_blank" rel="noopener">https://github.com/kiwings/CobaltStrike-Toolset/blob/master/template.x86.ps1</a></p>
 
           
         
