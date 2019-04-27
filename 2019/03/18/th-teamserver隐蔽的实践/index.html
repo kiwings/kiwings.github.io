@@ -103,14 +103,14 @@
 <meta name="keywords" content="technology">
 <meta property="og:type" content="article">
 <meta property="og:title" content="th-cobaltstrike团队服务器隐匿的实践">
-<meta property="og:url" content="localhost/2019/03/18/th-test/index.html">
+<meta property="og:url" content="localhost/2019/03/18/th-teamserver隐蔽的实践/index.html">
 <meta property="og:site_name" content="Kiwings">
 <meta property="og:description" content="preview由于最近重新申请了数个VPS，故想在踪迹隐藏方面下点功夫。以下图片是目前的通信方式。这算是一个低配版的多级C2。  Redirector有多种选择，一种是使用socat、ssh或者iptables等直接转发的工具，这类工具会将对应的请求包直接转发给目标服务器，不太好做条件转发。另一种是使用apache的mod_rewrite来转发，可以根据UA来进行有条件地转发，因此在这里就介绍一下">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="/images/cs_hidden/1.png">
 <meta property="og:image" content="/images/cs_hidden/2.png">
 <meta property="og:image" content="/images/cs_hidden/3.png">
-<meta property="og:updated_time" content="2019-03-19T15:21:14.000Z">
+<meta property="og:updated_time" content="2019-03-19T15:29:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="th-cobaltstrike团队服务器隐匿的实践">
 <meta name="twitter:description" content="preview由于最近重新申请了数个VPS，故想在踪迹隐藏方面下点功夫。以下图片是目前的通信方式。这算是一个低配版的多级C2。  Redirector有多种选择，一种是使用socat、ssh或者iptables等直接转发的工具，这类工具会将对应的请求包直接转发给目标服务器，不太好做条件转发。另一种是使用apache的mod_rewrite来转发，可以根据UA来进行有条件地转发，因此在这里就介绍一下">
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="localhost/2019/03/18/th-test/">
+  <link rel="canonical" href="localhost/2019/03/18/th-teamserver隐蔽的实践/">
 
 
 
@@ -331,7 +331,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="localhost/2019/03/18/th-test/">
+    <link itemprop="mainEntityOfPage" href="localhost/2019/03/18/th-teamserver隐蔽的实践/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kiwings">
@@ -513,6 +513,10 @@ RewriteRule ^.\*$ http:// __[www.baidu.com]__ /? [L,R=302]
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/04/th-DLL劫持/" rel="prev" title="th-DLL劫持">
+                th-DLL劫持 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -585,7 +589,7 @@ RewriteRule ^.\*$ http:// __[www.baidu.com]__ /? [L,R=302]
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -623,7 +627,9 @@ RewriteRule ^.\*$ http:// __[www.baidu.com]__ /? [L,R=302]
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
